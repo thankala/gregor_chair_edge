@@ -2,7 +2,8 @@ from typing import Any
 
 from flask import Flask, request, jsonify
 
-from gpio.gpio import set_pin_state, get_pin_state, cleanup, LEDPin, LEDState, init_pins
+from gpio.gpio import LedPin, State, init_pins, cleanup
+from workbench_2_controller.services.service import gpio_set_pin_state, gpio_get_pin_state
 
 app = Flask(__name__)
 
@@ -16,20 +17,20 @@ def set_led() -> Any:
 
     for pin_name, state_name in data.items():
         try:
-            pin = LEDPin[pin_name.upper()]
-            state = LEDState[state_name.upper()]
+            pin = LedPin[pin_name.upper()]
+            state = State[state_name.upper()]
         except KeyError:
             return jsonify({'error': f'Invalid pin or state name: {pin_name}, {state_name}'}), 400
 
-        set_pin_state(pin, state)
+        gpio_set_pin_state(pin, state)
 
-    states = {pin.name: get_pin_state(pin).name for pin in LEDPin}
+    states = {pin.name: gpio_get_pin_state(pin).name for pin in LedPin}
     return jsonify(states), 200
 
 
 @app.route('/pins', methods=['GET'])
 def get_leds_state():
-    states = {pin.name: get_pin_state(pin).name for pin in LEDPin}
+    states = {pin.name: gpio_get_pin_state(pin).name for pin in LedPin}
     return jsonify(states), 200
 
 
