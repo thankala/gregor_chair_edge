@@ -3,7 +3,7 @@ from typing import Any
 from flask import Flask, request, jsonify
 
 from gpio.gpio import LedPin, State, init_pins, cleanup
-from workbench_2_controller.services.service import gpio_set_pin_state, gpio_get_pin_state
+from services.service import gpio_set_pin_state, gpio_get_pin_state
 
 app = Flask(__name__)
 
