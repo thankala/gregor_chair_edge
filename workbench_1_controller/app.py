@@ -2,8 +2,8 @@ from typing import Any
 
 from flask import Flask, request, jsonify
 
-from workbench_1_controller.gpio.gpio import LedPin, State
-from workbench_1_controller.services.service import (
+from gpio.gpio import LedPin, State
+from services.service import (
     workbench_rotate,
     gpio_cleanup,
     gpio_init_pins,
