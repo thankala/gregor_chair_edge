@@ -14,7 +14,7 @@ from workbench_1_controller.services.service import (
 app = Flask(__name__)
 
 
-@app.route('/led', methods=['POST'])
+@app.route('/leds', methods=['POST'])
 def set_led() -> Any:
     data = request.get_json()
 
