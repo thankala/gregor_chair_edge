@@ -8,7 +8,7 @@ from workbench_2_controller.services.service import gpio_set_pin_state, gpio_get
 app = Flask(__name__)
 
 
-@app.route('/pin', methods=['POST'])
+@app.route('/leds', methods=['POST'])
 def set_led() -> Any:
     data = request.get_json()
 
@@ -28,7 +28,7 @@ def set_led() -> Any:
     return jsonify(states), 200
 
 
-@app.route('/pins', methods=['GET'])
+@app.route('/leds', methods=['GET'])
 def get_leds_state():
     states = {pin.name: gpio_get_pin_state(pin).name for pin in LedPin}
     return jsonify(states), 200
