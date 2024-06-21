@@ -1,29 +1,14 @@
 import RPi.GPIO as GPIO
-from enum import Enum
+
+from workbench_2_controller.gpio.led_state import LedState
+from workbench_2_controller.gpio.led_pin import LedPin
 
 
-class LedPin(Enum):
-    FREE = 14
-    ASSEMBLING = 15
-    PENDING = 18
-
-    def __str__(self):
-        return self.name
-
-
-class State(Enum):
-    HIGH = GPIO.HIGH
-    LOW = GPIO.LOW
-
-    def __str__(self):
-        return self.value
-
-
-def from_int(value: int) -> State | None:
+def from_int(value: int) -> LedState | None:
     if value == 0:
-        return State.LOW
+        return LedState.LOW
     if value == 1:
-        return State.HIGH
+        return LedState.HIGH
     return None
 
 
@@ -38,9 +23,9 @@ def cleanup() -> None:
     GPIO.cleanup()
 
 
-def get_pin_state(pin: LedPin) -> State | None:
+def get_pin_state(pin: LedPin) -> LedState | None:
     return from_int(GPIO.input(pin.value))
 
 
-def set_pin_state(pin: LedPin, state: State) -> None:
+def set_pin_state(pin: LedPin, state: LedState) -> None:
     GPIO.output(pin.value, state.value)
