@@ -1,15 +1,15 @@
 import RPi.GPIO as GPIO
 
-from .state import State
-from .led_pin import LedPin
-from .workbench_pin import WorkbenchPin
+from workbench_1_controller.gpio.led_state import LedState
+from workbench_1_controller.gpio.led_pin import LedPin
+from workbench_1_controller.gpio.workbench_pin import WorkbenchPin
 
 
-def from_int(value: int) -> State | None:
+def from_int(value: int) -> LedState | None:
     if value == 0:
-        return State.LOW
+        return LedState.LOW
     if value == 1:
-        return State.HIGH
+        return LedState.HIGH
     return None
 
 
@@ -28,9 +28,9 @@ def cleanup() -> None:
     GPIO.cleanup()
 
 
-def get_pin_state(pin: LedPin | WorkbenchPin) -> State | None:
+def get_pin_state(pin: LedPin | WorkbenchPin) -> LedState | None:
     return from_int(GPIO.input(pin.value))
 
 
-def set_pin_state(pin: LedPin | WorkbenchPin, state: State) -> None:
+def set_pin_state(pin: LedPin | WorkbenchPin, state: LedState) -> None:
     GPIO.output(pin.value, state.value)
