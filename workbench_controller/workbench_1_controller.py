@@ -1,10 +1,9 @@
 import os, sys
 import time
 
-from workbench_controller.domain.board_mode import BoardMode
-
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from workbench_controller.domain.board_mode import BoardMode
 from workbench_controller.domain.state import State
 from workbench_controller.services.gpio import set_pins_state
 from workbench_controller.controllers.controller import create_app
