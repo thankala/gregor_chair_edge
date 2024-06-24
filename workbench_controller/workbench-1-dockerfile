@@ -1,0 +1,17 @@
+FROM python:3.11-alpine
+
+WORKDIR /app
+
+RUN apk add --no-cache gcc libc-dev
+
+COPY requirements.txt requirements.txt
+
+RUN pip3 install -r requirements.txt
+
+COPY controllers/ controllers/
+COPY domain/ domain/
+COPY services/ services/
+
+COPY workbench_1_controller.py ./
+
+CMD [ "python3", "workbench_1_controller.py"]

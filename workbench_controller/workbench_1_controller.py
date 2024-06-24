@@ -103,7 +103,7 @@ if __name__ == '__main__':
         init_pins()
         set_initial_state_for_fixtures(workbench_1)
         app = create_app(workbench_1)
-        app.run(host='0.0.0.0', port=5000)
+        app.run(host='0.0.0.0', port=8000)
     except Exception as e:
         print(e)
     finally:

@@ -1,0 +1,10 @@
+services:
+  workbench_1:
+    build:
+      context: .
+      dockerfile: workbench-1-dockerfile
+    ports:
+      - "8000:8000"  # Map the webserver port from the container to the host
+    restart: always
+  #    devices:
+  #      - "/dev/gpiomem:/dev/gpiomem"  # Pass through the GPIO interface
