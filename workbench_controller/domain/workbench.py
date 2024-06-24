@@ -30,10 +30,11 @@ class Workbench:
     def get_available_states_for_given_fixture(self, fixture: Fixture) -> Dict[FixtureState, Pin]:
         return {state: pin for state, pin in fixture.states.items()}
 
-    def rotate(self) -> None:
+    def rotate(self) -> int:
         if self.rotation_func:
             self.rotation_func()
             self.rotations = self.rotations + 1
+            return self.rotations
         else:
             raise Exception(f"Rotation function not defined for workbench {self.name}")
 

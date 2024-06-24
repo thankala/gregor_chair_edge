@@ -37,9 +37,9 @@ def set_initial_state_for_fixtures(workbench: Workbench) -> None:
         raise Exception({'error': f'An error has occurred while setting initial state for fixtures: {e.args}'})
 
 
-def rotate_workbench(workbench: Workbench) -> None:
+def rotate_workbench(workbench: Workbench) -> int:
     try:
-        workbench.rotate()
+        return workbench.rotate()
     except Exception as e:
         raise Exception({'error': f'An error has occurred while rotating workbench: {e.args[0]}'})
 

@@ -10,7 +10,7 @@ def create_app(workbench: Workbench) -> Flask:
     @app.route('/workbench/rotate', methods=['POST'])
     def rotate():
         try:
-            return jsonify(rotate_workbench(workbench))
+            return jsonify({"rotation": rotate_workbench(workbench)})
         except Exception as e:
             return jsonify({'errors': e.args}), 400
 
