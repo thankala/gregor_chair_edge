@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class States(Enum):
+class State(Enum):
     LOW = 0
     HIGH = 1
 
