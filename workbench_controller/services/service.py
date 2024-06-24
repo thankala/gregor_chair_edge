@@ -1,8 +1,7 @@
 import typing
 
-from workbench_controller.domain.board_mode import BoardMode
-from workbench_controller.domain.pins import Pins
-from workbench_controller.domain.states import States
+from workbench_controller.domain.pin import Pin
+from workbench_controller.domain.state import State
 from workbench_controller.domain.workbench import Workbench, FixtureState, Fixture
 from workbench_controller.services.gpio import (
     set_pins_state as gpio_set_pin_state,
@@ -14,7 +13,7 @@ from workbench_controller.services.gpio import (
 
 def init_pins() -> None:
     try:
-        gpio_init_pins({pin.value for pin in Pins})
+        gpio_init_pins({pin.value for pin in Pin})
     except Exception as e:
         raise Exception({'error': f'An error has occurred while initializing pins: {e.args}'})
 
@@ -31,9 +30,9 @@ def set_initial_state_for_fixtures(workbench: Workbench) -> None:
         for fixture in workbench.fixtures.values():
             for fixture_state, pin in workbench.get_available_states_for_given_fixture(fixture).items():
                 if fixture_state == FixtureState.FREE:
-                    gpio_set_pin_state({pin.value: States.HIGH.value})
+                    gpio_set_pin_state({pin.value: State.HIGH.value})
                 else:
-                    gpio_set_pin_state({pin.value: States.LOW.value})
+                    gpio_set_pin_state({pin.value: State.LOW.value})
     except Exception as e:
         raise Exception({'error': f'An error has occurred while setting initial state for fixtures: {e.args}'})
 
@@ -45,12 +44,11 @@ def rotate_workbench(workbench: Workbench) -> None:
         raise Exception({'error': f'An error has occurred while rotating workbench: {e.args[0]}'})
 
 
-def set_fixture_state(workbench: Workbench, fixture_name: str, state_name: str) -> None:
+def set_fixture_state(workbench: Workbench, fixture_name: str, state_name: str) -> typing.Dict:
     try:
-        fixture = workbench.fixtures[fixture_name]
+        fixture = workbench.fixtures[fixture_name.upper()]
     except KeyError:
         raise Exception({'error': f'Invalid fixture: {fixture_name}'})
-
     try:
         state = FixtureState[state_name.upper()]
     except KeyError:
@@ -64,16 +62,20 @@ def set_fixture_state(workbench: Workbench, fixture_name: str, state_name: str) 
     if state in states:
         for fixture_state, pin in states.items():
             if fixture_state == state:
-                gpio_set_pin_state(pin.value, States.HIGH.value)
+                gpio_set_pin_state({pin.value: State.HIGH.value})
             else:
-                gpio_set_pin_state(pin.value, States.LOW.value)
+                gpio_set_pin_state({pin.value: State.LOW.value})
+    else:
+        raise Exception({'error': f'Invalid state for given fixture: {fixture_name},{state_name}'})
+
+    return get_fixture_state(workbench, fixture_name)
 
 
 def get_fixture_state(workbench: Workbench, fixture_name: typing.Optional[str] = None) -> typing.Dict:
     result = {}
     if fixture_name:
         try:
-            fixture = workbench.fixtures[fixture_name]
+            fixture = workbench.fixtures[fixture_name.upper()]
         except KeyError:
             raise Exception({'error': f'Invalid fixture: {fixture_name}'})
 
