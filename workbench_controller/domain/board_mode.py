@@ -1,10 +1,9 @@
 from enum import Enum
 
 
-class LedPin(Enum):
-    FREE = 14
-    ASSEMBLING = 15
-    PENDING = 18
+class BoardMode(Enum):
+    BCM = 11
+    BOARD = 10
 
     def __str__(self):
         return self.name
