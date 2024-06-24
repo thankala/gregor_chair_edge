@@ -4,15 +4,15 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from workbench_controller.controllers.controller import create_app
 from workbench_controller.services.service import cleanup, init_pins, set_initial_state_for_fixtures
-from workbench_controller.domain.pins import Pins
+from workbench_controller.domain.pin import Pin
 from workbench_controller.domain.workbench import Workbench, Fixture, FixtureState
 
 if __name__ == '__main__':
     fixture_set = {
         Fixture("P1", {
-            FixtureState.FREE: Pins.P14,
-            FixtureState.ASSEMBLING: Pins.P15,
-            FixtureState.PENDING: Pins.P18
+            FixtureState.FREE: Pin.P14,
+            FixtureState.ASSEMBLING: Pin.P15,
+            FixtureState.PENDING: Pin.P18
         })
     }
     workbench_2 = Workbench("W2", fixture_set)

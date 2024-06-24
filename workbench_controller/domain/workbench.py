@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Set, Dict, Optional, Callable
 
-from workbench_controller.domain.pins import Pins
+from workbench_controller.domain.pin import Pin
 
 
 class FixtureState(Enum):
@@ -12,7 +12,7 @@ class FixtureState(Enum):
 
 
 class Fixture:
-    def __init__(self, name: str, states: Dict[FixtureState, Pins]):
+    def __init__(self, name: str, states: Dict[FixtureState, Pin]):
         self.name = name
         self.states = states
 
@@ -27,7 +27,7 @@ class Workbench:
         self.rotation_func = rotation_func
         self.rotations = 0
 
-    def get_available_states_for_given_fixture(self, fixture: Fixture) -> Dict[FixtureState, Pins]:
+    def get_available_states_for_given_fixture(self, fixture: Fixture) -> Dict[FixtureState, Pin]:
         return {state: pin for state, pin in fixture.states.items()}
 
     def rotate(self) -> None:
@@ -36,9 +36,6 @@ class Workbench:
             self.rotations = self.rotations + 1
         else:
             raise Exception(f"Rotation function not defined for workbench {self.name}")
-
-    def get_pins(self) -> Set[Pins]:
-        return {pin for fixture in self.fixtures.values() for pin in fixture.states.values()}
 
     def __repr__(self):
         return f"Workbench(name={self.name}, fixtures={self.fixtures})"
