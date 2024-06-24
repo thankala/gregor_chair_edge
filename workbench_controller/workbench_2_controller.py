@@ -17,9 +17,9 @@ if __name__ == '__main__':
     }
     workbench_2 = Workbench("W2", fixture_set)
     try:
-        init_pins(workbench_2)
+        init_pins()
         set_initial_state_for_fixtures(workbench_2)
         app = create_app(workbench_2)
         app.run(host='0.0.0.0', port=5000)
     finally:
-        cleanup(workbench_2)
+        cleanup()
