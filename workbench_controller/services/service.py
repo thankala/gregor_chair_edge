@@ -1,9 +1,9 @@
 import typing
 
-from workbench_controller.domain.pin import Pin
-from workbench_controller.domain.state import State
-from workbench_controller.domain.workbench import Workbench, FixtureState, Fixture
-from workbench_controller.services.gpio import (
+from domain.pin import Pin
+from domain.state import State
+from domain.workbench import Workbench, FixtureState, Fixture
+from services.gpio import (
     set_pins_state as gpio_set_pin_state,
     get_pin_state as gpio_get_pin_state,
     cleanup as gpio_cleanup,

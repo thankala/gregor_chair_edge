@@ -1,15 +1,12 @@
-import os, sys
 import time
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from workbench_controller.domain.board_mode import BoardMode
-from workbench_controller.domain.state import State
-from workbench_controller.services.gpio import set_pins_state
-from workbench_controller.controllers.controller import create_app
-from workbench_controller.services.service import cleanup, init_pins, set_initial_state_for_fixtures
-from workbench_controller.domain.pin import Pin
-from workbench_controller.domain.workbench import Workbench, Fixture, FixtureState
+from domain.board_mode import BoardMode
+from domain.state import State
+from services.gpio import set_pins_state
+from controllers.controller import create_app
+from services.service import cleanup, init_pins, set_initial_state_for_fixtures
+from domain.pin import Pin
+from domain.workbench import Workbench, Fixture, FixtureState
 
 out1 = Pin.P13.value
 out2 = Pin.P11.value
@@ -20,7 +17,7 @@ out4 = Pin.P12.value
 def workbench_rotate() -> None:
     direction = 2
     for item in range(1):
-        for Step in range(130, 0, -1):
+        for step in range(130, 0, -1):
             if direction == 0:
                 set_pins_state({
                     out1: State.HIGH.value,

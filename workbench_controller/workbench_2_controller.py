@@ -1,11 +1,7 @@
-import os, sys
-
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from workbench_controller.controllers.controller import create_app
-from workbench_controller.services.service import cleanup, init_pins, set_initial_state_for_fixtures
-from workbench_controller.domain.pin import Pin
-from workbench_controller.domain.workbench import Workbench, Fixture, FixtureState
+from controllers.controller import create_app
+from services.service import cleanup, init_pins, set_initial_state_for_fixtures
+from domain.pin import Pin
+from domain.workbench import Workbench, Fixture, FixtureState
 
 if __name__ == '__main__':
     fixture_set = {

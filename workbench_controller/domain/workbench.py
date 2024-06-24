@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Set, Dict, Optional, Callable
 
-from workbench_controller.domain.pin import Pin
+from domain.pin import Pin
 
 
 class FixtureState(Enum):

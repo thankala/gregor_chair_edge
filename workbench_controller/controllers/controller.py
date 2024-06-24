@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 
-from workbench_controller.domain.workbench import Workbench
-from workbench_controller.services.service import rotate_workbench, get_fixture_state, set_fixture_state
+from domain.workbench import Workbench
+from services.service import rotate_workbench, get_fixture_state, set_fixture_state
 
 
 def create_app(workbench: Workbench) -> Flask:
