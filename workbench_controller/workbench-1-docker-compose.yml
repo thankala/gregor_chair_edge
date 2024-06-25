@@ -6,5 +6,6 @@ services:
     ports:
       - "8000:8000"  # Map the webserver port from the container to the host
     restart: always
+    privileged: true
     devices:
       - /dev/gpiomem:/dev/gpiomem
