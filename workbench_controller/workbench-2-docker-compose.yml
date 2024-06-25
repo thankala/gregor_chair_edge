@@ -6,5 +6,6 @@ services:
     ports:
       - "8000:8000"  # Map the webserver port from the container to the host
     restart: always
-  #    devices:
-  #      - "/dev/gpiomem:/dev/gpiomem"  # Pass through the GPIO interface
+    volumes:
+      - "/sys/devices/platform/soc/3f200000.gpio:/sys/devices/platform/soc/3f200000.gpio" #Pass through GPIO
+      - "/sys/class/gpio:/sys/class/gpio"
