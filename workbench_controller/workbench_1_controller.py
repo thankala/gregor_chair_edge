@@ -13,7 +13,6 @@ out4 = Pin.P18
 
 
 def workbench_rotate() -> None:
-
     direction = 2
     for item in range(1):
         for step in range(129, 0, -1):
