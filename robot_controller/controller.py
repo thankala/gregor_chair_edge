@@ -1,3 +1,4 @@
+import typing
 from typing import Any
 
 from lib.interface import Interface
@@ -5,10 +6,11 @@ from time import sleep
 
 
 class RobotController:
-    def __init__(self, port: str = '/dev/ttyUSB0'):
+    def __init__(self, name: str = 'Robot1', port: str = '/dev/ttyUSB0'):
         self.doBot = Interface(port)
         if self.doBot.connected():
-            print(f'doBot: {self.doBot} is connected.')
+            print(f'doBot: {self.doBot.get_device_name()} is connected.')
+            self.doBot.set_device_name(name)
         else:
             print(f'doBot: {self.doBot} is not connected.')
 
@@ -32,11 +34,20 @@ class RobotController:
         self.doBot.wait(ms)
         self.block()
 
-    def get_pose(self):
-        return self.doBot.get_pose()[0:4]
+    def get_pose(self) -> typing.Dict[str, float]:
+        pose = self.doBot.get_pose()[0:4]
+        return {
+            'x': pose[0],
+            'y': pose[1],
+            'z': pose[2],
+            'r': pose[3]
+        }
 
     def clear_alarms(self):
         self.doBot.clear_alarms_state()
+
+    def get_alarms_state(self):
+        return self.doBot.get_alarms_state()
 
     def block(self):
         self.doBot.wait(0)
