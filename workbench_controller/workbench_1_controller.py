@@ -73,16 +73,16 @@ def workbench_rotate() -> None:
 
 if __name__ == '__main__':
     fixture_set = {
-        Fixture("P1", {
+        Fixture("F1", {
             FixtureState.FREE: Pin.P13,
             FixtureState.ASSEMBLING: Pin.P19,
             FixtureState.COMPLETED: Pin.P26
-        }), Fixture("P2", {
+        }), Fixture("F2", {
             FixtureState.FREE: Pin.P12,
             FixtureState.ASSEMBLING: Pin.P16,
             FixtureState.PENDING: Pin.P20,
             FixtureState.COMPLETED: Pin.P21
-        }), Fixture("P3", {
+        }), Fixture("F3", {
             FixtureState.FREE: Pin.P15,
             FixtureState.ASSEMBLING: Pin.P5,
             FixtureState.COMPLETED: Pin.P6

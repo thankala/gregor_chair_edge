@@ -5,7 +5,7 @@ from domain.workbench import Workbench, Fixture, FixtureState
 
 if __name__ == '__main__':
     fixture_set = {
-        Fixture("P1", {
+        Fixture("F1", {
             FixtureState.FREE: Pin.P14,
             FixtureState.ASSEMBLING: Pin.P15,
             FixtureState.PENDING: Pin.P18
