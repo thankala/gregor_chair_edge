@@ -6,13 +6,21 @@ from time import sleep
 
 
 class RobotController:
-    def __init__(self, name: str = 'Robot1', port: str = '/dev/ttyUSB0'):
-        self.doBot = Interface(port)
+    def __init__(self, name: str = 'robot1', port: str = '/dev/ttyUSB'):
+        self.name = name
+        self.port = port + '_' + name
+        self.doBot = Interface(self.port)
+
         if self.doBot.connected():
+            self.doBot.set_device_name(self.name)
             print(f'doBot: {self.doBot.get_device_name()} is connected.')
-            self.doBot.set_device_name(name)
+            self.home()
         else:
             print(f'doBot: {self.doBot} is not connected.')
+
+    def home(self):
+        self.move(260, 0, 90, 90)
+        self.ungrip()
 
     # Primitive functions
     def move(self, x: Any, y: Any, z: Any, r: Any):
@@ -25,10 +33,11 @@ class RobotController:
         self.block()
 
     def ungrip(self):
-        self.doBot.set_end_effector_gripper(True, False)
-        self.doBot.wait(300)
-        self.doBot.set_end_effector_gripper(False, False)
-        self.block()
+        if self.doBot.get_end_effector_gripper()[1]:
+            self.doBot.set_end_effector_gripper(True, False)
+            self.doBot.wait(300)
+            self.doBot.set_end_effector_gripper(False, False)
+            self.block()
 
     def wait(self, ms: Any):
         self.doBot.wait(ms)
@@ -59,17 +68,84 @@ class RobotController:
             sleep(0.5)
 
     # Composite functions
-    def place_part(self, x1: Any, y1: Any, z1: Any, r1: Any, x2: Any, y2: Any, z2: Any, r2: Any):
-        self.ungrip()
-        self.move(x1, y1, z1, r1)
-        self.grip()
-        self.move(x2, y2, z2, r2)
-        self.ungrip()
+    def move_to(self, name: str):
+        if name == "W2":
+            if self.name == 'robot1':
+                self.move(260, -120, 90, 90)
+            if self.name == 'robot2':
+                self.move(260, 120, 90, 90)
+            if self.name == "robot3":
+                raise Exception("Robot3 cannot move to W2.")
+        if name == "W1":
+            if self.name == 'robot1':
+                self.move(260, 120, 90, 90)
+            if self.name == 'robot2':
+                self.move(260, -120, 90, 90)
+            if self.name == "robot3":
+                self.move(260, 0, 90, 90)
 
-    def move_and_screw(self, x: Any, y: Any, z: Any, r: Any, deg: Any):
-        self.move(x, y, z, r)
+    def pick_and_place(self):
+        self.move(self.get_pose().get('x'),
+                  self.get_pose().get('y'),
+                  self.get_pose().get('z') - 45,
+                  self.get_pose().get('r'))
+        self.move(self.get_pose().get('x'),
+                  self.get_pose().get('y'),
+                  self.get_pose().get('z'),
+                  self.get_pose().get('r'))
+
+    def pick_and_insert(self):
+        self.move(self.get_pose().get('x'),
+                  self.get_pose().get('y'),
+                  self.get_pose().get('z') - 45,
+                  self.get_pose().get('r'))
         self.grip()
-        self.move(x, y, z, 150)
-        self.grip()
-        self.move(x, y, z, 150 - deg)
+        self.move(self.get_pose().get('x'),
+                  self.get_pose().get('y'),
+                  self.get_pose().get('z'),
+                  self.get_pose().get('r'))
+        self.move(self.get_pose().get('x'),
+                  self.get_pose().get('y'),
+                  self.get_pose().get('z') - 45,
+                  self.get_pose().get('r'))
         self.ungrip()
+        self.move(self.get_pose().get('x'),
+                  self.get_pose().get('y'),
+                  self.get_pose().get('z'),
+                  self.get_pose().get('r'))
+
+    def pick_and_flip_and_press(self):
+        self.move(self.get_pose().get('x'),
+                  self.get_pose().get('y'),
+                  self.get_pose().get('z') - 45,
+                  self.get_pose().get('r'))
+        self.grip()
+        self.move(self.get_pose().get('x'),
+                  self.get_pose().get('y'),
+                  self.get_pose().get('z'),
+                  self.get_pose().get('r'))
+        self.move(self.get_pose().get('x'),
+                  self.get_pose().get('y'),
+                  self.get_pose().get('z') - 45,
+                  self.get_pose().get('r'))
+        self.ungrip()
+        self.grip()
+        self.ungrip()
+        self.move(self.get_pose().get('x'),
+                  self.get_pose().get('y'),
+                  self.get_pose().get('z'),
+                  self.get_pose().get('r'))
+
+    def screw_pick_and_fasten(self):
+        self.move(self.get_pose().get('x'),
+                  self.get_pose().get('y'),
+                  self.get_pose().get('z') - 45,
+                  self.get_pose().get('r'))
+        self.grip()
+        self.ungrip()
+        self.grip()
+        self.ungrip()
+        self.move(self.get_pose().get('x'),
+                  self.get_pose().get('y'),
+                  self.get_pose().get('z'),
+                  self.get_pose().get('r'))
