@@ -1,8 +1,10 @@
 import os
+
 from flask import Flask, jsonify, request
 from controller import RobotController
 
 robot_name = os.getenv('ROBOT_NAME', 'robot1')
+port = os.getenv('PORT', 8000)
 
 app = Flask(__name__)
 
@@ -128,4 +130,4 @@ def screw_pick_and_fasten():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8001)
+    app.run(host='0.0.0.0', port=port)
