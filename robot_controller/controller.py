@@ -24,6 +24,11 @@ class RobotController:
 
     # Primitive functions
     def move(self, x: Any, y: Any, z: Any, r: Any):
+        pose = self.get_pose()
+        is_same = lambda a, b: abs(a - b) >= 0.0001
+        if is_same(pose["x"], x) and is_same(pose["y"], y) and is_same(pose["z"], z) and is_same(pose["r"], r):
+            return
+
         self.doBot.set_point_to_point_command(1, x, y, z, r)
         self.block()
 
