@@ -4,7 +4,7 @@ services:
     environment:
       - ROBOT_NAME=robot1  # Device path for the robot
     ports:
-      - "8000:8000"  # Map the webserver port from the container to the host
+      - "8001:8000"  # Map the webserver port from the container to the host
     restart: always
     privileged: true
   #    devices:
@@ -14,7 +14,7 @@ services:
     environment:
       - ROBOT_PORT=robot2  # Device path for the robot
     ports:
-      - "8001:8000"  # Map the webserver port from the container to the host
+      - "8002:8000"  # Map the webserver port from the container to the host
     restart: always
     privileged: true
   #    devices:
@@ -24,7 +24,7 @@ services:
     environment:
       - ROBOT_PORT=robot3  # Device path for the robot
     ports:
-      - "8002:8000"  # Map the webserver port from the container to the host
+      - "8003:8000"  # Map the webserver port from the container to the host
     restart: always
     privileged: true
 #    devices:
