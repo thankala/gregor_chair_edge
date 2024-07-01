@@ -91,7 +91,7 @@ class RobotController:
                   self.get_pose().get('r'))
         self.move(self.get_pose().get('x'),
                   self.get_pose().get('y'),
-                  self.get_pose().get('z'),
+                  self.get_pose().get('z') + 45,
                   self.get_pose().get('r'))
 
     def pick_and_insert(self):
@@ -102,7 +102,7 @@ class RobotController:
         self.grip()
         self.move(self.get_pose().get('x'),
                   self.get_pose().get('y'),
-                  self.get_pose().get('z'),
+                  self.get_pose().get('z') + 45,
                   self.get_pose().get('r'))
         self.move(self.get_pose().get('x'),
                   self.get_pose().get('y'),
@@ -111,7 +111,7 @@ class RobotController:
         self.ungrip()
         self.move(self.get_pose().get('x'),
                   self.get_pose().get('y'),
-                  self.get_pose().get('z'),
+                  self.get_pose().get('z') + 45,
                   self.get_pose().get('r'))
 
     def pick_and_flip_and_press(self):
@@ -122,7 +122,7 @@ class RobotController:
         self.grip()
         self.move(self.get_pose().get('x'),
                   self.get_pose().get('y'),
-                  self.get_pose().get('z'),
+                  self.get_pose().get('z') + 45,
                   self.get_pose().get('r'))
         self.move(self.get_pose().get('x'),
                   self.get_pose().get('y'),
@@ -133,7 +133,7 @@ class RobotController:
         self.ungrip()
         self.move(self.get_pose().get('x'),
                   self.get_pose().get('y'),
-                  self.get_pose().get('z'),
+                  self.get_pose().get('z') + 45,
                   self.get_pose().get('r'))
 
     def screw_pick_and_fasten(self):
@@ -147,5 +147,5 @@ class RobotController:
         self.ungrip()
         self.move(self.get_pose().get('x'),
                   self.get_pose().get('y'),
-                  self.get_pose().get('z'),
+                  self.get_pose().get('z') + 45,
                   self.get_pose().get('r'))
