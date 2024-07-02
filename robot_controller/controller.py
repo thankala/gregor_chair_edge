@@ -9,6 +9,7 @@ from time import sleep
 
 class RobotController:
     def __init__(self, serial_number: str, name: str = 'robot1', port: str = '/dev/ttyUSB', ):
+        print(f'Initializing doBot: {name} with serial number: {serial_number}')
         self.name = name
         self.doBot = None
         for i in range(4):

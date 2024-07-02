@@ -3,7 +3,7 @@ services:
     build: .
     environment:
       - ROBOT_NAME=robot1
-      - ROBOT_SERIAL_NUMBER=123456
+      - ROBOT_SERIAL_NUMBER=${ROBOT_1_SERIAL_NUMBER}
     ports:
       - "8001:8000"  # Map the webserver port from the container to the host
     restart: always
@@ -16,7 +16,7 @@ services:
     build: .
     environment:
       - ROBOT_NAME=robot2
-      - ROBOT_SERIAL_NUMBER=123456
+      - ROBOT_SERIAL_NUMBER=${ROBOT_2_SERIAL_NUMBER}
     ports:
       - "8002:8000"  # Map the webserver port from the container to the host
     restart: always
@@ -29,7 +29,7 @@ services:
     build: .
     environment:
       - ROBOT_NAME=robot3
-      - ROBOT_SERIAL_NUMBER=123456
+      - ROBOT_SERIAL_NUMBER=${ROBOT_3_SERIAL_NUMBER}
     ports:
       - "8003:8000"  # Map the webserver port from the container to the host
     restart: always
