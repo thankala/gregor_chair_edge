@@ -46,20 +46,12 @@ class RobotController:
         self.block()
 
     def grip(self, enable_control: bool = True, enable_grip: bool = True):
-        control, grip = self.doBot.get_end_effector_gripper()
-        if grip:
-            return
-
         self.doBot.set_end_effector_gripper(True, True)
         self.doBot.wait(300)
         self.doBot.set_end_effector_gripper(False, True)
         self.block()
 
     def ungrip(self):
-        control, grip = self.doBot.get_end_effector_gripper()
-        if not grip:
-            return
-
         self.doBot.set_end_effector_gripper(True, False)
         self.doBot.wait(300)
         self.doBot.set_end_effector_gripper(False, True)
