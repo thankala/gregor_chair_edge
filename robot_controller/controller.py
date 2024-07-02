@@ -85,7 +85,7 @@ class RobotController:
         return self.doBot.get_alarms_state()
 
     def block(self):
-        self.doBot.wait(0)
+        self.doBot.wait(100)
         queue_index = self.doBot.get_current_queue_index()
         while True:
             if self.doBot.get_current_queue_index() > queue_index:
