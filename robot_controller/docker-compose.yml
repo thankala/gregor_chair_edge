@@ -8,8 +8,10 @@ services:
       - "8001:8000"  # Map the webserver port from the container to the host
     restart: always
     privileged: true
-    devices:
-      - "/dev/ttyUSB_robot1:/dev/ttyUSB_robot1"  # Pass through the USB device
+    volumes:
+      - /dev:/dev
+      - .:/app
+
   robot_2:
     build: .
     environment:
@@ -32,5 +34,6 @@ services:
       - "8003:8000"  # Map the webserver port from the container to the host
     restart: always
     privileged: true
-    devices:
-      - "/dev/ttyUSB_robot3:/dev/ttyUSB_robot3"  # Pass through the USB device
+    volumes:
+      - /dev:/dev
+      - .:/app
