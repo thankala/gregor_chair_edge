@@ -2,7 +2,8 @@ services:
   robot_1:
     build: .
     environment:
-      - ROBOT_NAME=robot1  # Device path for the robot
+      - ROBOT_NAME=robot1
+      - ROBOT_SERIAL_NUMBER=123456
     ports:
       - "8001:8000"  # Map the webserver port from the container to the host
     restart: always
@@ -12,17 +13,21 @@ services:
   robot_2:
     build: .
     environment:
-      - ROBOT_PORT=robot2  # Device path for the robot
+      - ROBOT_NAME=robot2
+      - ROBOT_SERIAL_NUMBER=123456
     ports:
       - "8002:8000"  # Map the webserver port from the container to the host
     restart: always
     privileged: true
-    devices:
-      - "/dev/ttyUSB_robot2:/dev/ttyUSB_robot2"  # Pass through the USB device
+    volumes:
+      - /dev:/dev
+      - .:/app
+
   robot_3:
     build: .
     environment:
-      - ROBOT_PORT=robot3  # Device path for the robot
+      - ROBOT_NAME=robot3
+      - ROBOT_SERIAL_NUMBER=123456
     ports:
       - "8003:8000"  # Map the webserver port from the container to the host
     restart: always

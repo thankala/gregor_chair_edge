@@ -4,11 +4,12 @@ from flask import Flask, jsonify, request
 from controller import RobotController
 
 robot_name = os.getenv('ROBOT_NAME', 'robot1')
+robot_serial_number = os.getenv('ROBOT_SERIAL_NUMBER', '123456')
 port = os.getenv('PORT', 8000)
 
 app = Flask(__name__)
 
-controller = RobotController(name=robot_name)
+controller = RobotController(serial_number=robot_serial_number, name=robot_name)
 
 
 @app.route('/primitive/move', methods=['POST'])

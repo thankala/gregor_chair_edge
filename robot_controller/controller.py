@@ -1,16 +1,29 @@
 import typing
 from typing import Any
 
+from serial.serialutil import SerialException
+
 from lib.interface import Interface
 from time import sleep
 
 
 class RobotController:
-    def __init__(self, name: str = 'robot1', port: str = '/dev/ttyUSB'):
+    def __init__(self, serial_number: str, name: str = 'robot1', port: str = '/dev/ttyUSB', ):
         self.name = name
-        self.port = port + '_' + name
-        self.doBot = Interface(self.port)
-
+        self.doBot = None
+        for i in range(4):
+            try:
+                interface = Interface(port + str(i))
+                print(interface.get_device_serial_number())
+                if serial_number == interface.get_device_serial_number():
+                    self.doBot = interface
+                    self.port = port + str(i)
+                    break
+            except SerialException:
+                print("Unable to find doBot on port: " + port + str(i))
+                continue
+        if self.doBot is None:
+            raise Exception("Unable to find doBot on any port.")
         if self.doBot.connected():
             self.doBot.set_device_name(self.name)
             print(f'doBot: {self.doBot.get_device_name()} is connected.')
