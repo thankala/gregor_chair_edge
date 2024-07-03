@@ -1,5 +1,6 @@
 services:
   workbench_2:
+    container_name: workbench_2
     image: gocas/workbench_2:latest
     build:
       context: .
