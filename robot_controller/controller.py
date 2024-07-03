@@ -15,14 +15,19 @@ class RobotController:
         for i in range(4):
             try:
                 interface = Interface(port + str(i))
-                print(interface.get_device_serial_number())
-                if serial_number == interface.get_device_serial_number():
+                interface_serial = str(interface.get_device_serial_number())
+                print("Checking serial number: " + interface_serial + " on port: " + port + str(i))
+                if serial_number == interface_serial.strip('\x00'):
                     self.doBot = interface
                     self.port = port + str(i)
                     break
             except SerialException:
                 print("Unable to find doBot on port: " + port + str(i))
                 continue
+            except AttributeError:
+                print("An error has occurred")
+                continue
+
         if self.doBot is None:
             raise Exception("Unable to find doBot on any port.")
         if self.doBot.connected():
