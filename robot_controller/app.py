@@ -26,6 +26,15 @@ def move():
         return jsonify({'error': str(e)}), 400
 
 
+@app.route('/home', methods=['POST'])
+def home():
+    try:
+        controller.home()
+        return jsonify({'success': True}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+
 @app.route('/primitive/grip', methods=['POST'])
 def grip():
     data = request.get_json()
