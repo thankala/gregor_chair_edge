@@ -1,5 +1,6 @@
 services:
   robot_1:
+    image: gocas/robot_1:latest
     build: .
     environment:
       - ROBOT_NAME=robot1
@@ -13,6 +14,7 @@ services:
       - .:/app
 
   robot_2:
+    image: gocas/robot_2:latest
     build: .
     environment:
       - ROBOT_NAME=robot2
@@ -26,6 +28,7 @@ services:
       - .:/app
 
   robot_3:
+    image: gocas/robot_3:latest
     build: .
     environment:
       - ROBOT_NAME=robot3

@@ -1,5 +1,6 @@
 services:
   workbench_1:
+    image: gocas/workbench_2:latest
     build:
       context: .
       dockerfile: workbench-1-dockerfile
