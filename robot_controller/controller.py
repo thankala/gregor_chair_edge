@@ -56,12 +56,12 @@ class RobotController:
             self.move(current_pose.get('x'), current_pose.get('y'), 90, current_pose.get('r'))
             self.move(260, 0, 90, 50)
         elif self.name == "robot3":
-            self.move(current_pose.get('x'), current_pose.get('y'), 110, current_pose.get('r'))
-            self.move(260, 0, 110, 0)
+            self.move(current_pose.get('x'), current_pose.get('y'), 90, current_pose.get('r'))
+            self.move(260, 0, 90, 0)
         self.ungrip()
 
     # Primitive functions
-    def move(self, x: Any, y: Any, z: Any, r: Any) -> typing.Dict[str, float]:
+    def move(self, x: Any, y: Any, z: Any, r: Any) -> typing.Dict[str, any]:
         self.doBot.set_point_to_point_command(1, x, y, z, r)
         self.block()
         return {'x': x, 'y': y, 'z': z, r: 'r'}
@@ -87,7 +87,7 @@ class RobotController:
         return self.doBot.get_alarms_state()
 
     def block(self):
-        self.doBot.wait(100)
+        self.doBot.wait(50)
         queue_index = self.doBot.get_current_queue_index()
         while True:
             if self.doBot.get_current_queue_index() > queue_index:
@@ -99,16 +99,16 @@ class RobotController:
         current_pose = self.get_pose()
         if name == "W1":
             if self.name == 'robot1':
-                self.move(260, 110, 110, current_pose.get('r'))
+                self.move(260, 110, 90, current_pose.get('r'))
             elif self.name == 'robot2':
-                self.move(260, -110, 110, current_pose.get('r'))
+                self.move(260, -110, 90, current_pose.get('r'))
             elif self.name == "robot3":
-                self.move(260, 0, 130, current_pose.get('r'))
+                self.move(260, 0, 90, current_pose.get('r'))
         elif name == "W2":
             if self.name == 'robot1':
-                self.move(260, -120, 40, current_pose.get('r'))
+                self.move(270, -100, 40, current_pose.get('r'))
             elif self.name == 'robot2':
-                self.move(260, 90, 40, current_pose.get('r'))
+                self.move(270, 80, 40, current_pose.get('r'))
             else:
                 raise Exception(f"{self.name} cannot move to {name}.")
         elif name == "CB1":
@@ -130,9 +130,13 @@ class RobotController:
         elif name == "B3":
             if self.name == "robot1":
                 self.move(290, 0, 20, current_pose.get('r'))
+            else:
+                raise Exception(f"{self.name} cannot move to {name}")
         elif name == "B4":
             if self.name == "robot2":
                 self.move(170, -160, 20, current_pose.get('r'))
+            else:
+                raise Exception(f"{self.name} cannot move to {name}")
         elif name == "B5":
             if self.name == "robot2":
                 self.move(290, 20, 20, current_pose.get('r'))
@@ -159,7 +163,6 @@ class RobotController:
                   current_pose.get('y'),
                   110,
                   current_pose.get('r'))
-        self.wait(500)
 
     def place(self):
         current_pose = self.get_pose()
