@@ -24,6 +24,26 @@ def move():
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
+@app.route('/primitive/grip', methods=['POST'])
+def grip():
+    data = request.get_json()
+    enable_control = data.get('enable_control', True)
+    enable_grip = data.get('enable_grip', True)
+    try:
+        controller.grip(enable_control, enable_grip)
+        return jsonify({'success': True}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+
+@app.route('/primitive/ungrip', methods=['POST'])
+def ungrip():
+    try:
+        controller.ungrip()
+        return jsonify({'success': True}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
 
 @app.route('/primitive/get_pose', methods=['GET'])
 def get_pose():
@@ -48,27 +68,6 @@ def wait():
 def home():
     try:
         controller.home()
-        return jsonify({'success': True}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 400
-
-
-@app.route('/primitive/grip', methods=['POST'])
-def grip():
-    data = request.get_json()
-    enable_control = data.get('enable_control', True)
-    enable_grip = data.get('enable_grip', True)
-    try:
-        controller.grip(enable_control, enable_grip)
-        return jsonify({'success': True}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 400
-
-
-@app.route('/primitive/ungrip', methods=['POST'])
-def ungrip():
-    try:
-        controller.ungrip()
         return jsonify({'success': True}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 400
