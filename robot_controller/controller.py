@@ -100,11 +100,11 @@ class RobotController:
         current_pose = self.get_pose()
         if name == "W1":
             if self.name == 'robot1':
-                self.move(280, 110, 90, current_pose.get('r'))
+                self.move(260, 110, 90, current_pose.get('r'))
             elif self.name == 'robot2':
-                self.move(280, -110, 90, current_pose.get('r'))
+                self.move(260, -110, 90, current_pose.get('r'))
             elif self.name == "robot3":
-                self.move(280, 0, 90, current_pose.get('r'))
+                self.move(260, 0, 90, current_pose.get('r'))
         elif name == "W2":
             if self.name == 'robot1':
                 self.move(270, -90, 40, current_pose.get('r'))
@@ -114,7 +114,7 @@ class RobotController:
                 raise Exception(f"{self.name} cannot move to {name}.")
         elif name == "CB1":
             if self.name == "robot1":
-                self.move(280, -150, 40, current_pose.get('r'))
+                self.move(230, -120, 40, current_pose.get('r'))
             else:
                 raise Exception(f"{self.name} cannot move to {name}.")
         elif name == "CB2":
@@ -123,12 +123,12 @@ class RobotController:
             return
         elif name == "B1":
             if self.name == "robot1":
-                self.move(230, 90, 20, current_pose.get('r'))
+                self.move(210, 90, 20, current_pose.get('r'))
             else:
                 raise Exception(f"{self.name} cannot move to {name}")
         elif name == "B2":
             if self.name == "robot1":
-                self.move(230, 180, 20, current_pose.get('r'))
+                self.move(200, 180, 20, current_pose.get('r'))
             else:
                 raise Exception(f"{self.name} cannot move to {name}")
         elif name == "B3":
