@@ -107,7 +107,7 @@ class RobotController:
                 self.move(260, 0, 90, current_pose.get('r'))
         elif name == "W2":
             if self.name == 'robot1':
-                self.move(270, -100, 40, current_pose.get('r'))
+                self.move(270, -90, 40, current_pose.get('r'))
             elif self.name == 'robot2':
                 self.move(270, 80, 40, current_pose.get('r'))
             else:
