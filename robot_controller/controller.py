@@ -118,9 +118,15 @@ class RobotController:
             else:
                 raise Exception(f"{self.name} cannot move to {name}.")
         elif name == "CB2":
-            return
+            if self.name == "robot3":
+                self.move(220, -150, 20, current_pose.get('r'))
+            else:
+                raise Exception(f"{self.name} cannot move to {name}")
         elif name == "CB3":
-            return
+            if self.name == "robot3":
+                self.move(220, 190, 20, current_pose.get('r'))
+            else:
+                raise Exception(f"{self.name} cannot move to {name}")
         elif name == "B1":
             if self.name == "robot1":
                 self.move(210, 90, 20, current_pose.get('r'))
@@ -148,12 +154,12 @@ class RobotController:
                 raise Exception(f"{self.name} cannot move to {name}")
         elif name == "B6R":
             if self.name == "robot3":
-                self.move(220, 130, 20, current_pose.get('r'))
+                self.move(160, 180, 20, current_pose.get('r'))
             else:
                 raise Exception(f"{self.name} cannot move to {name}")
         elif name == "B6L":
             if self.name == "robot3":
-                self.move(270, 130, 20, current_pose.get('r'))
+                self.move(210, 170, 20, current_pose.get('r'))
             else:
                 raise Exception(f"{self.name} cannot move to {name}")
         else:
