@@ -74,7 +74,7 @@ class RobotController:
     def ungrip(self):
         self.doBot.set_end_effector_gripper(True, True)
         self.block()
-        self.doBot.set_end_effector_gripper(False, False)
+        self.doBot.set_end_effector_gripper(False, True)
         self.block()
 
     def wait(self, ms: Any):
