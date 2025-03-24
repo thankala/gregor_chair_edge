@@ -1,5 +1,4 @@
 import os
-import logging as log
 from flask import Flask, jsonify, request
 from controller import RobotController
 
@@ -29,7 +28,6 @@ def grip():
     data = request.get_json()
     enable_control = data.get('enable_control', True)
     enable_grip = data.get('enable_grip', True)
-    log.info(f"enable_control: {enable_control}, enable_grip: {enable_grip}")
     try:
         controller.grip(enable_control, enable_grip)
         return jsonify({'success': True}), 200
