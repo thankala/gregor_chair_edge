@@ -1,4 +1,3 @@
-import threading
 import typing
 from typing import Any
 
@@ -69,11 +68,11 @@ class RobotController:
     def grip(self, enable_control: bool = True, enable_grip: bool = True):
         self.doBot.set_end_effector_gripper(enable_control, enable_grip)
         self.block()
-        self.doBot.set_end_effector_gripper(False, enable_control)
+        self.doBot.set_end_effector_gripper(False, False)
         self.block()
 
     def ungrip(self):
-        self.doBot.set_end_effector_gripper(False, True)
+        self.doBot.set_end_effector_gripper(True, True)
         self.block()
         self.doBot.set_end_effector_gripper(False, False)
         self.block()
