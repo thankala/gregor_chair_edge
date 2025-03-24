@@ -69,6 +69,8 @@ class RobotController:
     def grip(self, enable_control: bool = True, enable_grip: bool = True):
         self.doBot.set_end_effector_gripper(enable_control, enable_grip)
         self.block()
+        self.doBot.set_end_effector_gripper(enable_control, False)
+        self.block()
 
     def ungrip(self):
         self.doBot.set_end_effector_gripper(True, False)
