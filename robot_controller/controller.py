@@ -123,12 +123,12 @@ class RobotController:
             return
         elif name == "B1":
             if self.name == "robot1":
-                self.move(210, 90, 20, current_pose.get('r'))
+                self.move(230, 90, 20, current_pose.get('r'))
             else:
                 raise Exception(f"{self.name} cannot move to {name}")
         elif name == "B2":
             if self.name == "robot1":
-                self.move(200, 180, 20, current_pose.get('r'))
+                self.move(230, 180, 20, current_pose.get('r'))
             else:
                 raise Exception(f"{self.name} cannot move to {name}")
         elif name == "B3":
