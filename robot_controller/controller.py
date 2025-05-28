@@ -181,8 +181,33 @@ class RobotController:
                   current_pose.get('y'),
                   110,
                   current_pose.get('r'))
+    
+    def screw(self):
+        self.grip()
+        current_pose = self.get_pose()
+        self.move(current_pose.get('x'),
+                  current_pose.get('y'),
+                  current_pose.get('z'),
+                  -100)
+        self.move(current_pose.get('x'),
+                  current_pose.get('y'),
+                  current_pose.get('z'),
+                  100)
+        self.ungrip()
+        # self.move(current_pose.get('x'),
+        #           current_pose.get('y'),
+        #           current_pose.get('z'),
+        #           -100)
+        # self.move(current_pose.get('x'),
+        #           current_pose.get('y'),
+        #           current_pose.get('z') + 30,
+        #           100)
+        # self.move(current_pose.get('x'),
+        #           current_pose.get('y'),
+        #           current_pose.get('z'),
+        #           current_pose.get('r'))
 
-    def pick_and_place(self):
+    def flip(self):
         current_pose = self.get_pose()
         self.grip()
         self.move(current_pose.get('x'),
@@ -194,8 +219,9 @@ class RobotController:
                   current_pose.get('z'),
                   current_pose.get('r'))
         self.ungrip()
+    
 
-    def pick_and_insert(self):
+    def press(self):
         current_pose = self.get_pose()
         self.grip()
         self.move(current_pose.get('x'),
@@ -208,77 +234,42 @@ class RobotController:
                   current_pose.get('r'))
         self.move(current_pose.get('x'),
                   current_pose.get('y'),
-                  current_pose.get('z'),
-                  -100)
-        self.move(current_pose.get('x'),
-                  current_pose.get('y'),
                   current_pose.get('z') + 30,
-                  100)
+                  current_pose.get('r'))
         self.move(current_pose.get('x'),
                   current_pose.get('y'),
                   current_pose.get('z'),
                   current_pose.get('r'))
+        self.ungrip()
 
-    def pick_and_flip_and_press(self):
-        current_pose = self.get_pose()
-        self.grip()
-        self.move(current_pose.get('x'),
-                  current_pose.get('y'),
-                  current_pose.get('z') + 30,
-                  current_pose.get('r'))
-        self.move(current_pose.get('x'),
-                  current_pose.get('y'),
-                  current_pose.get('z'),
-                  current_pose.get('r'))
-        self.move(current_pose.get('x'),
-                  current_pose.get('y'),
-                  current_pose.get('z'),
-                  - 100)
-        self.move(current_pose.get('x'),
-                  current_pose.get('y'),
-                  current_pose.get('z'),
-                  100)
-        self.move(current_pose.get('x'),
-                  current_pose.get('y'),
-                  current_pose.get('z') + 30,
-                  100)
-        self.move(current_pose.get('x'),
-                  current_pose.get('y'),
-                  current_pose.get('z'),
-                  100)
-        self.move(current_pose.get('x'),
-                  current_pose.get('y'),
-                  current_pose.get('z'),
-                  current_pose.get('r'))
-
-    def screw_pick_and_fasten(self):
-        current_pose = self.get_pose()
-        self.grip()
-        self.move(current_pose.get('x'),
-                  current_pose.get('y'),
-                  current_pose.get('z'),
-                  -100)
-        self.move(current_pose.get('x'),
-                  current_pose.get('y'),
-                  current_pose.get('z'),
-                  100)
-        self.move(current_pose.get('x'),
-                  current_pose.get('y'),
-                  current_pose.get('z') + 30,
-                  100)
-        self.move(current_pose.get('x'),
-                  current_pose.get('y'),
-                  current_pose.get('z'),
-                  100)
-        self.move(current_pose.get('x'),
-                  current_pose.get('y'),
-                  current_pose.get('z'),
-                  -100)
-        self.move(current_pose.get('x'),
-                  current_pose.get('y'),
-                  current_pose.get('z'),
-                  100)
-        self.move(current_pose.get('x'),
-                  current_pose.get('y'),
-                  current_pose.get('z'),
-                  current_pose.get('r'))
+    # def screw_pick_and_fasten(self):
+    #     current_pose = self.get_pose()
+    #     self.grip()
+    #     self.move(current_pose.get('x'),
+    #               current_pose.get('y'),
+    #               current_pose.get('z'),
+    #               -100)
+    #     self.move(current_pose.get('x'),
+    #               current_pose.get('y'),
+    #               current_pose.get('z'),
+    #               100)
+    #     self.move(current_pose.get('x'),
+    #               current_pose.get('y'),
+    #               current_pose.get('z') + 30,
+    #               100)
+    #     self.move(current_pose.get('x'),
+    #               current_pose.get('y'),
+    #               current_pose.get('z'),
+    #               100)
+    #     self.move(current_pose.get('x'),
+    #               current_pose.get('y'),
+    #               current_pose.get('z'),
+    #               -100)
+    #     self.move(current_pose.get('x'),
+    #               current_pose.get('y'),
+    #               current_pose.get('z'),
+    #               100)
+    #     self.move(current_pose.get('x'),
+    #               current_pose.get('y'),
+    #               current_pose.get('z'),
+    #               current_pose.get('r'))

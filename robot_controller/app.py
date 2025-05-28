@@ -10,6 +10,14 @@ app = Flask(__name__)
 
 controller = RobotController(serial_number=robot_serial_number, name=robot_name)
 
+@app.route('/home', methods=['POST'])
+def home():
+    try:
+        controller.home()
+        return jsonify({'success': True}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
 
 @app.route('/primitive/move', methods=['POST'])
 def move():
@@ -21,7 +29,7 @@ def move():
     try:
         return jsonify(controller.move(x, y, z, r)), 200
     except Exception as e:
-        return jsonify({'error': str(e)}), 400
+        return jsonify({'error': str(e)}), 40
 
 @app.route('/primitive/grip', methods=['POST'])
 def grip():
@@ -63,15 +71,6 @@ def wait():
         return jsonify({'error': str(e)}), 400
 
 
-@app.route('/home', methods=['POST'])
-def home():
-    try:
-        controller.home()
-        return jsonify({'success': True}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 400
-
-
 @app.route("/primitive/move/<name>", methods=["POST"])
 def move_to(name: str):
     try:
@@ -80,7 +79,7 @@ def move_to(name: str):
         return jsonify({'error': str(e)}), 400
 
 
-@app.route("/primitive/pick", methods=["POST"])
+@app.route("/composite/pick", methods=["POST"])
 def pick():
     try:
         controller.pick()
@@ -89,7 +88,7 @@ def pick():
         return jsonify({'error': str(e)}), 400
 
 
-@app.route("/primitive/place", methods=["POST"])
+@app.route("/composite/place", methods=["POST"])
 def place():
     try:
         controller.place()
@@ -97,38 +96,28 @@ def place():
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
-
-@app.route("/composite/pick_and_place", methods=["POST"])
-def pick_and_place():
+@app.route("/composite/screw", methods=["POST"])
+def screw():
     try:
-        controller.pick_and_place()
+        controller.screw()
         return jsonify({'success': True}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
 
-@app.route("/composite/pick_and_insert", methods=["POST"])
-def pick_and_insert():
+@app.route('/composite/flip', methods=['POST'])
+def flip():
     try:
-        controller.pick_and_insert()
+        controller.flip()
         return jsonify({'success': True}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
 
-@app.route('/composite/pick_and_flip_and_press', methods=['POST'])
-def pick_and_flip_and_press():
+@app.route('/composite/press', methods=['POST'])
+def press():
     try:
-        controller.pick_and_flip_and_press()
-        return jsonify({'success': True}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 400
-
-
-@app.route('/composite/screw_pick_and_fasten', methods=['POST'])
-def screw_pick_and_fasten():
-    try:
-        controller.screw_pick_and_fasten()
+        controller.press()
         return jsonify({'success': True}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 400
